@@ -8,12 +8,12 @@ use Illuminate\Auth\Access\Response;
 
 class VentaPolicy
 {
-    /**
+    /** 
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('SuperAdmin') || $user->hasRole('Admin') || $user->hasRole('Ventas') || $user->hasRole('Auditor');
+        return $user->hasRole('SuperAdmin') || $user->hasRole('Admin') || $user->hasRole('Ventas') || $user->hasRole('hola');
     }
 
     /**
