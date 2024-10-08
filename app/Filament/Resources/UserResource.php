@@ -15,6 +15,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\TrashedFilter;
 
 class UserResource extends Resource
 {
@@ -51,11 +52,14 @@ class UserResource extends Resource
                 TextColumn::make('roles.name'),
             ])
             ->filters([
-                //
+                TrashedFilter::make(),
                 Tables\Filters\Filter::make('verified')
                 ->query(fn (Builder $query):Builder =>  $query->whereNotNull('email_verified_at')),
             ])
             ->actions([
+                Tables\Actions\RestoreAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\DeleteAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('Verify')
                 ->icon('heroicon-m-check-badge')
@@ -71,9 +75,9 @@ class UserResource extends Resource
                 })
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+ //               Tables\Actions\BulkActionGroup::make([
+   //                 Tables\Actions\DeleteBulkAction::make(),
+            
             ]);
     }
 
