@@ -54,7 +54,12 @@ class AdminPanelProvider extends PanelProvider
             ])
 
             // ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
+
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+            ])
             
+
             ->authMiddleware([
                 Authenticate::class,
             ]);
